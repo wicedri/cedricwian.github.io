@@ -124,13 +124,14 @@ contactForm.addEventListener("submit", (event) => {
 
     event.preventDefault();
 
-    const name = document.getElementById("name").value;
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+    const subject = `Portfolio message from ${name}`;
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
 
-    alert(
-        `Thanks ${name}! Your message form is working.`
-    );
-
-    contactForm.reset();
+    window.location.href =
+        `mailto:icedricwian@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
 });
 

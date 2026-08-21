@@ -814,6 +814,223 @@ textarea {
     font-size: 0.78rem;
 }
 
+.work-showcase {
+    display: grid;
+    gap: 14px;
+}
+
+.work-card {
+    overflow: hidden;
+    border: 1px solid #273443;
+    border-radius: 12px;
+    background: rgba(16, 25, 35, 0.72);
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.work-card:has(.work-card-trigger[aria-expanded="true"]) {
+    border-color: #00d4ff;
+    background: rgba(16, 25, 35, 0.95);
+}
+
+.work-card-trigger {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 45px 48px 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 24px;
+    border: 0;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    background: transparent;
+}
+
+.work-card-trigger:hover .work-card-copy strong,
+.work-card-trigger:focus-visible .work-card-copy strong {
+    color: #00d4ff;
+}
+
+.work-card-number {
+    color: #00d4ff;
+    font-family: monospace;
+    font-size: 0.82rem;
+}
+
+.work-card-icon {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    border-radius: 50%;
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.08);
+    font-size: 1.25rem;
+}
+
+.work-card-copy {
+    display: grid;
+    gap: 4px;
+}
+
+.work-card-copy strong {
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.work-card-copy small {
+    color: #8996a6;
+    font-size: 0.86rem;
+}
+
+.work-card-toggle {
+    color: #00d4ff;
+    font-size: 1rem;
+    transition: transform 0.35s ease;
+}
+
+.work-card-trigger[aria-expanded="true"] .work-card-toggle {
+    transform: rotate(45deg);
+}
+
+.work-card-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-height: 0;
+    padding: 0 24px;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.55s ease, padding 0.55s ease, opacity 0.35s ease, transform 0.55s ease;
+}
+
+.work-card-trigger[aria-expanded="true"] + .work-card-gallery {
+    max-height: 720px;
+    padding: 0 24px 24px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.work-card-gallery img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+    cursor: zoom-in;
+    opacity: 0;
+    transform: scale(0.96);
+}
+
+.work-card-trigger[aria-expanded="true"] + .work-card-gallery img {
+    animation: workImageReveal 0.5s ease forwards;
+}
+
+.work-card-gallery img:nth-child(2) { animation-delay: 0.06s; }
+.work-card-gallery img:nth-child(3) { animation-delay: 0.12s; }
+.work-card-gallery img:nth-child(4) { animation-delay: 0.18s; }
+.work-card-gallery img:nth-child(5) { animation-delay: 0.24s; }
+.work-card-gallery img:nth-child(6) { animation-delay: 0.30s; }
+
+@keyframes workImageReveal {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.image-viewer[hidden] {
+    display: none;
+}
+
+.image-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 24px 100px;
+    background: rgba(3, 7, 12, 0.94);
+    backdrop-filter: blur(10px);
+    animation: viewerFadeIn 0.25s ease;
+}
+
+.image-viewer-stage {
+    width: min(1100px, 92vw);
+    height: min(78vh, 760px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.image-viewer-stage:active {
+    cursor: grabbing;
+}
+
+.image-viewer-stage img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    user-select: none;
+    transform: scale(1);
+    transition: transform 0.25s ease;
+}
+
+.image-viewer-close,
+.image-viewer-controls button {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #e7edf5;
+    background: rgba(10, 15, 22, 0.82);
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.image-viewer-close {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+}
+
+.image-viewer-close:hover,
+.image-viewer-controls button:hover {
+    border-color: #00d4ff;
+    color: #00d4ff;
+    transform: translateY(-2px);
+}
+
+.image-viewer-controls {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    display: flex;
+    gap: 9px;
+    transform: translateX(-50%);
+}
+
+.image-viewer-controls button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+@keyframes viewerFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 /* =====================================================
    ON-SITE WORK ALBUM
 ===================================================== */
@@ -2225,6 +2442,16 @@ a:hover {
     border-color: #d4dbe3;
 }
 
+.light-mode .work-card {
+    background: rgba(255, 255, 255, 0.62);
+    border-color: #d4dbe3;
+}
+
+.light-mode .work-card:has(.work-card-trigger[aria-expanded="true"]) {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #0096b4;
+}
+
 .light-mode .machinery-placeholder {
     background:
         radial-gradient(circle at center, rgba(0, 150, 180, 0.12), transparent 40%),
@@ -2446,6 +2673,32 @@ a:hover {
         min-height: 260px;
     }
 
+    .work-card-trigger {
+        grid-template-columns: 35px 42px 1fr auto;
+        gap: 12px;
+        padding: 17px;
+    }
+
+    .work-card-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .work-card-copy strong {
+        font-size: 1rem;
+    }
+
+    .work-card-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        padding-right: 17px;
+        padding-left: 17px;
+    }
+
+    .work-card-trigger[aria-expanded="true"] + .work-card-gallery {
+        padding-right: 17px;
+        padding-left: 17px;
+    }
+
     .onsite-album {
         grid-auto-rows: 165px;
     }
@@ -2461,6 +2714,10 @@ a:hover {
 
     .system-image {
         min-height: 220px;
+    }
+
+    .work-card-gallery img {
+        height: 155px;
     }
 
     .footer-content {

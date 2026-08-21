@@ -275,3 +275,94 @@ class VisitorAnalytics {
 document.addEventListener("DOMContentLoaded", () => {
     new VisitorAnalytics();
 });
+
+
+// =====================================================
+// WORK GALLERY CARDS
+// =====================================================
+
+const workCards = document.querySelectorAll("[data-work-card]");
+
+workCards.forEach(card => {
+    const trigger = card.querySelector(".work-card-trigger");
+
+    trigger.addEventListener("click", () => {
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+        trigger.setAttribute("aria-expanded", String(!isExpanded));
+    });
+});
+
+
+// =====================================================
+// IMAGE VIEWER
+// =====================================================
+
+const imageViewer = document.getElementById("image-viewer");
+const imageViewerImage = document.getElementById("image-viewer-image");
+const imageViewerStage = document.querySelector(".image-viewer-stage");
+const imageViewerClose = document.getElementById("image-viewer-close");
+const imageZoomIn = document.getElementById("image-zoom-in");
+const imageZoomOut = document.getElementById("image-zoom-out");
+const imageZoomReset = document.getElementById("image-zoom-reset");
+const galleryImages = document.querySelectorAll(".work-card-gallery img");
+let imageZoom = 1;
+
+function updateImageZoom() {
+    imageViewerImage.style.transform = `scale(${imageZoom})`;
+}
+
+function closeImageViewer() {
+    imageViewer.hidden = true;
+    imageViewerImage.removeAttribute("src");
+    imageZoom = 1;
+    document.body.style.overflow = "";
+}
+
+function openImageViewer(image) {
+    imageViewerImage.src = image.currentSrc || image.src;
+    imageViewerImage.alt = image.alt;
+    imageZoom = 1;
+    updateImageZoom();
+    imageViewer.hidden = false;
+    document.body.style.overflow = "hidden";
+    imageViewerClose.focus();
+}
+
+galleryImages.forEach(image => {
+    image.addEventListener("click", () => openImageViewer(image));
+});
+
+imageZoomIn.addEventListener("click", () => {
+    imageZoom = Math.min(imageZoom + 0.25, 3.5);
+    updateImageZoom();
+});
+
+imageZoomOut.addEventListener("click", () => {
+    imageZoom = Math.max(imageZoom - 0.25, 0.75);
+    updateImageZoom();
+});
+
+imageZoomReset.addEventListener("click", () => {
+    imageZoom = 1;
+    updateImageZoom();
+});
+
+imageViewerClose.addEventListener("click", closeImageViewer);
+
+imageViewer.addEventListener("click", event => {
+    if (event.target === imageViewer) {
+        closeImageViewer();
+    }
+});
+
+imageViewerStage.addEventListener("wheel", event => {
+    event.preventDefault();
+    imageZoom = Math.max(0.75, Math.min(3.5, imageZoom + (event.deltaY < 0 ? 0.15 : -0.15)));
+    updateImageZoom();
+}, { passive: false });
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !imageViewer.hidden) {
+        closeImageViewer();
+    }
+});

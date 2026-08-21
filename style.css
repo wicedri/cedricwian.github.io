@@ -48,6 +48,10 @@ textarea {
     background: #0d141e;
 }
 
+.portfolio-optional {
+    display: none;
+}
+
 .light-mode .section-alt {
     background: #e9edf2;
 }

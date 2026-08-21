@@ -116,27 +116,6 @@ window.addEventListener("scroll", () => {
 
 
 // =====================================================
-// CONTACT FORM
-// =====================================================
-const contactForm = document.getElementById("contact-form");
-
-contactForm.addEventListener("submit", (event) => {
-
-    event.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-    const subject = `Portfolio message from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-
-    window.location.href =
-        `mailto:icedricwian@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-});
-
-
-// =====================================================
 // VISITOR TRACKING & ANALYTICS
 // =====================================================
 

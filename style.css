@@ -1452,8 +1452,9 @@ textarea {
 
 .contact-grid {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 80px;
+    grid-template-columns: minmax(0, 680px);
+    justify-content: center;
+    gap: 40px;
 }
 
 .contact-info h3 {
@@ -1500,43 +1501,6 @@ textarea {
 .contact-item a:hover {
     color: #00d4ff;
 }
-
-.contact-form {
-    display: grid;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.form-group label {
-    font-size: 0.85rem;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-
-    padding: 14px;
-
-    border: 1px solid #293544;
-    border-radius: 7px;
-
-    background: #101923;
-    color: white;
-
-    outline: none;
-    resize: vertical;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #00d4ff;
-}
-
 
 /* =====================================================
    FOOTER

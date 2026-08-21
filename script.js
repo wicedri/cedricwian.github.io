@@ -380,3 +380,12 @@ journeyTrigger.addEventListener("click", () => {
     journeyTrigger.setAttribute("aria-expanded", String(!isExpanded));
     journeyRoom.hidden = isExpanded;
 });
+
+const achievementTrigger = document.getElementById("achievement-trigger");
+const achievementRoom = document.getElementById("achievement-room");
+
+achievementTrigger.addEventListener("click", () => {
+    const isExpanded = achievementTrigger.getAttribute("aria-expanded") === "true";
+    achievementTrigger.setAttribute("aria-expanded", String(!isExpanded));
+    achievementRoom.hidden = isExpanded;
+});

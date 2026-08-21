@@ -389,3 +389,44 @@ achievementTrigger.addEventListener("click", () => {
     achievementTrigger.setAttribute("aria-expanded", String(!isExpanded));
     achievementRoom.hidden = isExpanded;
 });
+
+
+// =====================================================
+// SCROLL REVEALS
+// =====================================================
+
+const revealGroups = document.querySelectorAll(
+    ".section-heading, .about-grid, .skills-grid, .projects-grid, " +
+    ".work-showcase, .cv-layout, .timeline, .achievements-grid, .contact-grid"
+);
+
+revealGroups.forEach(group => {
+    group.classList.add("reveal-on-scroll");
+
+    if (
+        group.matches(".skills-grid, .projects-grid") ||
+        group.matches(".work-showcase")
+    ) {
+        group.classList.add("reveal-stagger");
+        Array.from(group.children).forEach(child => {
+            child.classList.add("reveal-on-scroll");
+        });
+    }
+});
+
+const revealElements = document.querySelectorAll(".reveal-on-scroll");
+
+if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px" });
+
+    revealElements.forEach(element => revealObserver.observe(element));
+} else {
+    revealElements.forEach(element => element.classList.add("is-visible"));
+}

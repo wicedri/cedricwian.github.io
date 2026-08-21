@@ -52,6 +52,75 @@ textarea {
     display: none;
 }
 
+/* =====================================================
+   PROFESSIONAL MOTION SYSTEM
+===================================================== */
+
+.hero-content > *,
+.hero-visual {
+    opacity: 0;
+    animation: portfolioIntro 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-content > *:nth-child(1) { animation-delay: 0.08s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.16s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.24s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.32s; }
+.hero-content > *:nth-child(5) { animation-delay: 0.40s; }
+.hero-content > *:nth-child(6) { animation-delay: 0.48s; }
+.hero-visual { animation-delay: 0.22s; }
+
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-stagger > .reveal-on-scroll:nth-child(2) { transition-delay: 0.08s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(3) { transition-delay: 0.16s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(4) { transition-delay: 0.24s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(5) { transition-delay: 0.32s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(6) { transition-delay: 0.40s; }
+.reveal-stagger > .reveal-on-scroll:nth-child(7) { transition-delay: 0.48s; }
+
+@keyframes portfolioIntro {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .hero-content > *,
+    .hero-visual,
+    .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 .journey-trigger {
     width: 100%;
     display: flex;

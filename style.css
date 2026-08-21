@@ -52,6 +52,60 @@ textarea {
     display: none;
 }
 
+.journey-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 26px;
+    border: 1px solid #273443;
+    border-radius: 12px;
+    color: inherit;
+    font: inherit;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    background: rgba(16, 25, 35, 0.65);
+    transition: 0.3s;
+}
+
+.journey-trigger:hover,
+.journey-trigger[aria-expanded="true"] {
+    border-color: #00d4ff;
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.06);
+}
+
+.journey-trigger i {
+    font-size: 1.1rem;
+    transition: transform 0.35s ease;
+}
+
+.journey-trigger[aria-expanded="true"] i {
+    transform: rotate(45deg);
+}
+
+.journey-room[hidden] {
+    display: none;
+}
+
+.journey-room:not([hidden]) {
+    animation: journeyReveal 0.5s ease both;
+}
+
+@keyframes journeyReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .light-mode .section-alt {
     background: #e9edf2;
 }

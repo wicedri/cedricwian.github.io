@@ -366,3 +366,17 @@ document.addEventListener("keydown", event => {
         closeImageViewer();
     }
 });
+
+
+// =====================================================
+// EXPERIENCE ROOM
+// =====================================================
+
+const journeyTrigger = document.getElementById("journey-trigger");
+const journeyRoom = document.getElementById("journey-room");
+
+journeyTrigger.addEventListener("click", () => {
+    const isExpanded = journeyTrigger.getAttribute("aria-expanded") === "true";
+    journeyTrigger.setAttribute("aria-expanded", String(!isExpanded));
+    journeyRoom.hidden = isExpanded;
+});
